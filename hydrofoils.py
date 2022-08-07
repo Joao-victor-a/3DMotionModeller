@@ -51,7 +51,7 @@ class Hydrofoil(Force3D):
 
     def moment_around(self, r_vect):
         return Force3D.moment_around(self, r_vect) + \
-               np.array([0, 0.5 * self.cM * self.rho * self.vel_mag ** 2 * self.area * self.chord, 0])
+            np.array([0, 0.5 * self.cM * self.rho * self.vel_mag ** 2 * self.area * self.chord, 0])
 
 
 class HydrofoilBoat(SimulatedBody):
@@ -61,9 +61,11 @@ class HydrofoilBoat(SimulatedBody):
         mass = 200
         w = 1  # m
         h = 0.5  # m
-        l = 3  # m
-        I = mass / 12 * np.array([[(h ** 2 + l ** 2), 0, 0], [0, (w ** 2 + l ** 2), 0], [0, 0, (w ** 2 + h ** 2)]])
-        super(HydrofoilBoat, self).__init__(mass, step_time=step_time, cg=[0, 0, 0], moments_of_inertia=I)
+        lenght = 3  # m
+        In = mass / 12 * np.array([[(h ** 2 + lenght ** 2), 0, 0],
+                                  [0, (w ** 2 + lenght ** 2), 0], [0, 0, (w ** 2 + h ** 2)]])
+        super(HydrofoilBoat, self).__init__(
+            mass, step_time=step_time, cg=[0, 0, 0], moments_of_inertia=In)
         self.left_thrust = Force3D([0, 0, 0], position=[-0.2, -0.5, -0.9])
         self.left_static = Hydrofoil(cL_over_aoa=0.08, area=0.165, chord=0.2, cD_over_aoa=0.005, cM_over_aoa=0.01,
                                      pos=[-0.2, -0.5, -0.9])

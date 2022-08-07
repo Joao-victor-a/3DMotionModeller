@@ -4,6 +4,7 @@ import matplotlib
 
 matplotlib.use('Qt5Agg')
 
+
 def trace_plot_2d(body: MotionStore3D, ax1: str, ax2: str):
     f = plt.figure()
     ax = f.add_subplot(111)
@@ -38,5 +39,6 @@ def plot_against_time(body: MotionStore3D, **kwargs):
     ax.legend()
     ax.set_ylabel(kwargs.get("y_label", "Values"))
     ax.set_xlabel("Time (s)")
+
 
 show = plt.show
