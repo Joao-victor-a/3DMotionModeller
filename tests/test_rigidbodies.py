@@ -51,4 +51,5 @@ class TestBody(ArrayTestCase):
         self.assertArrayEqual([1, 0, 0], self.body.acceleration)
 
     def test_orientation_matrix(self):
-        self.assertArrayEqual(np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]), self.body.rotation_matrix)
+        self.assertArrayEqual(
+            np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]]), self.body.rotation_matrix)

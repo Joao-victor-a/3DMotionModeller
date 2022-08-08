@@ -1,6 +1,6 @@
 import numpy as np
 
-from dynamics3d.inertialvectors import Force3D, rotation_quaternion, TimeVaryingForce, Moment
+from dynamics3d.inertialvectors import Force3D, Moment, TimeVaryingForce, rotation_quaternion
 from .testutils import ArrayTestCase
 
 
@@ -11,7 +11,8 @@ class TestForce3D(ArrayTestCase):
         self.assertAlmostEqual(10, self.force.magnitude, delta=0.001)
 
         self.force = Force3D([10, 0, 0], [4, 0, 0])
-        self.assertAlmostEqual(10, self.force.magnitude, delta=0.001, msg="Check with a non zero location")
+        self.assertAlmostEqual(10, self.force.magnitude, delta=0.001,
+                               msg="Check with a non zero location")
 
         self.force = Force3D([-10, 0, 10])
         self.assertAlmostEqual(14.142, self.force.magnitude, delta=0.001)
@@ -35,18 +36,22 @@ class TestForce3D(ArrayTestCase):
 
     def test_force_orientation_independent(self):
         self.force = Force3D([10, 0, 0], orientation_dependent=False)
-        self.assertArrayEqual([10, 0, 0], self.force.in_frame(np.array([[1, 0, 0], [0, -1, 0], [0, -1, 0]])))
+        self.assertArrayEqual([10, 0, 0], self.force.in_frame(
+            np.array([[1, 0, 0], [0, -1, 0], [0, -1, 0]])))
 
     def test_force_orientation_dependent(self):
         self.force = Force3D([10, 0, 0], orientation_dependent=True)
-        self.assertArrayEqual([10, 0, 0], self.force.in_frame(np.array([[1, 0, 0], [0, -1, 0], [0, -1, 0]])))
+        self.assertArrayEqual([10, 0, 0], self.force.in_frame(
+            np.array([[1, 0, 0], [0, -1, 0], [0, -1, 0]])))
 
     def test_force_orientation_dependent_changes(self):
         self.force = Force3D([10, 0, 0], orientation_dependent=True)
-        self.assertArrayEqual([0, 10, 0], self.force.in_frame(np.array([[0, -1, 0], [1, 0, 0], [0, 0, 1]])))
+        self.assertArrayEqual([0, 10, 0], self.force.in_frame(
+            np.array([[0, -1, 0], [1, 0, 0], [0, 0, 1]])))
 
     def test_rotation_quaternion_valid(self):
-        self.assertQuaternionAlmostEqual(np.quaternion(0, 0, 1, 0), rotation_quaternion(np.pi, np.array([0, 1, 0])))
+        self.assertQuaternionAlmostEqual(np.quaternion(
+            0, 0, 1, 0), rotation_quaternion(np.pi, np.array([0, 1, 0])))
 
 
 class TestTimeVaryingForce(ArrayTestCase):

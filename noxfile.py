@@ -3,7 +3,7 @@ import nox
 
 package = "3DMotionModeller"
 nox.options.sessions = "lint", "tests", "coverage"
-locations = "dynamics3d/inertialvectors.py"
+locations = "tests", "dynamics3d"
 
 
 # cache configuration
@@ -14,7 +14,7 @@ nox.options.reuse_existing_virtualenvs = True
 @nox.session(python=["3.8"])
 def lint(session):
     """Run linter."""
-    # args = session.posargs or locations
+    args = session.posargs or locations
     session.install(
         "flake8==3.9.2",
         "bandit==1.7.2",
@@ -23,7 +23,7 @@ def lint(session):
         "flake8-docstrings",
         "flake8-import-order",
     )
-    session.run("flake8", "--exclude=.nox", locations)  # *args)
+    session.run("flake8", *args)
 
 
 @nox.session(python=["3.8"])

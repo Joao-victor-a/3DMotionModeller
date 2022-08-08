@@ -1,10 +1,11 @@
 [flake8]
 select = ANN,B,B9,BLK,C,D,DAR,E,F,I,S,W
-ignore = ANN101,ANN102,ANN204,B006,B008,B904,BLK100,E203,E731,E501,I201,I202,S101,S104,S605,W503,I100
+ignore = ANN101,ANN102,ANN204,B006,B008,B904,BLK100,E203,E731,E501,I201,I202,S101,S104,S605,W503,I100, D100
+application-import-names = tests, inertialvectors, plotting, rigidbodies, simulation
 max-line-length = 100
 max-complexity = 10
 docstring-convention = numpy
 per-file-ignores =
     */__init__.py: F401
-    cost_matrix/cost_matrix/application/oil_consumption_service.py: F401
+    tests/*.py: D102, D100, D101
 
